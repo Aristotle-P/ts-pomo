@@ -1,11 +1,10 @@
-import Timer from "../components/Timer";
-import Button from "../components/Button";
+import { Card } from "@/components/Card";
+
 export default function Home() {
-  return (
-    <>
+    return (
+        <>
             <header>TS-Pomo</header>
-            <Timer />
-            <Button />
-    </>
-  )
+            <Card />
+        </>
+    )
 }
