@@ -1,27 +1,48 @@
 "use client" 
 import Timer from "./Timer"
 import Button from "./Button"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const Card = () => {
-    const [work, setWork] = useState<number>(25)
-    const [shortBreak, setShortBreak] = useState<number>(5)
-    const [longBreak, setLongBreak] = useState<number>(20)
+    const [minutes, setMinutes] = useState(2);
+    const [seconds, setSeconds] = useState(0);
+    const [isPaused, setIsPaused] = useState(true);
 
-    function startTimer(time: number) {
-        console.log("clicked");
-        while (time < 0) {
-            time -1;
-            setTimeout(() => {
-                setWork(time);
-            }, 1000);
-            console.log(time)
-        }
+    function toggleTimer() {
+        setIsPaused(prevState => !prevState);
     }
+
+    useEffect(() => {
+        let interval = setInterval(() => {
+            if (isPaused) {
+                return;
+            }
+            if (seconds === 0) {
+                if (minutes !== 0) {
+                    setSeconds(59);
+                    setMinutes(prevState => prevState -1);
+                    return;
+                } else {
+                    setIsPaused(prevState => !prevState);
+                    return;
+                }
+            } 
+            setSeconds(prevState => prevState -1);
+        }, 1000)
+
+        return () => clearInterval(interval);
+    }, [seconds, isPaused])
+
+    const displayMins = minutes < 10 ? `0${minutes}` : minutes;
+    const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
+
     return (
         <div>
-            <Timer work={work} shortBreak={shortBreak} longBreak={longBreak} />
-            <Button startTimer={startTimer} />
+            <div>
+                {displayMins}:{displaySeconds}
+            </div>
+            <Button toggleTimer={toggleTimer} />
         </div>
     )
 }
+

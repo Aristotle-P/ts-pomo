@@ -1,12 +1,7 @@
-type TimerProps = {
-    work: number,
-    shortBreak: number,
-    longBreak: number
-}
-export default function Timer({work, shortBreak, longBreak}: TimerProps) {
+export default function Timer({displayedTime}: string) {
     return (
         <div>
-            {work}
+            {displayedTime}
         </div>
     )
 }

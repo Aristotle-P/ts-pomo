@@ -1,7 +1,7 @@
-export default function Button({startTimer}: any) {
+export default function Button({toggleTimer}: any) {
     return (
         <div>
-            <button onClick={startTimer}>Start Timer</button>
+            <button onClick={toggleTimer}>Start Timer</button>
         </div>
     )
 }
