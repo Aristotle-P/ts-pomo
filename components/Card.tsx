@@ -38,9 +38,7 @@ export const Card = () => {
 
     return (
         <div>
-            <div>
-                {displayMins}:{displaySeconds}
-            </div>
+            <Timer  displayMins={displayMins} displaySeconds={displaySeconds}/>
             <Button toggleTimer={toggleTimer} />
         </div>
     )

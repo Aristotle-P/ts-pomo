@@ -1,7 +1,12 @@
-export default function Timer({displayedTime}: string) {
+type TimerProps = {
+    displayMins: string | number,
+    displaySeconds: string | number
+}
+
+export default function Timer({displayMins, displaySeconds}: TimerProps) {
     return (
         <div>
-            {displayedTime}
+            {displayMins}:{displaySeconds}
         </div>
     )
 }
