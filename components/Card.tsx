@@ -6,10 +6,15 @@ import { useEffect, useState } from "react"
 export const Card = () => {
     const [minutes, setMinutes] = useState(2);
     const [seconds, setSeconds] = useState(0);
+    const [onBreak, setOnBreak] = useState(false);
     const [isPaused, setIsPaused] = useState(true);
 
     function toggleTimer() {
         setIsPaused(prevState => !prevState);
+    }
+
+    function startBreak() {
+        setMinutes(5);
     }
 
     useEffect(() => {
@@ -23,12 +28,20 @@ export const Card = () => {
                     setMinutes(prevState => prevState -1);
                     return;
                 } else {
-                    setIsPaused(prevState => !prevState);
+                    if (!onBreak) {
+                        setOnBreak(true);
+                        setMinutes(5);
+                        setSeconds(0)
+                        return;
+                    }
+                    setOnBreak(false);
+                    setMinutes(2);
+                    setSeconds(0)
                     return;
                 }
             } 
             setSeconds(prevState => prevState -1);
-        }, 1000)
+        }, 50)
 
         return () => clearInterval(interval);
     }, [seconds, isPaused])
