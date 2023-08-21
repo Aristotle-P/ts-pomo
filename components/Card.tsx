@@ -32,11 +32,13 @@ export const Card = () => {
                         setOnBreak(true);
                         setMinutes(5);
                         setSeconds(0)
+                        setIsPaused(true);
                         return;
                     }
                     setOnBreak(false);
                     setMinutes(2);
                     setSeconds(0)
+                    setIsPaused(true);
                     return;
                 }
             } 
