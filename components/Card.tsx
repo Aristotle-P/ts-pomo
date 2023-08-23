@@ -2,15 +2,21 @@
 import Timer from "./Timer"
 import Button from "./Button"
 import { useEffect, useState } from "react"
+import Settings from "./Settings"
 
 export const Card = () => {
     const [minutes, setMinutes] = useState(2);
     const [seconds, setSeconds] = useState(0);
     const [onBreak, setOnBreak] = useState(false);
     const [isPaused, setIsPaused] = useState(true);
+    const [showSettings, setShowSettings] = useState(false);
 
     function toggleTimer() {
         setIsPaused(prevState => !prevState);
+    }
+
+    function toggleSettings() {
+        setShowSettings(prevState => !prevState);
     }
 
     function startBreak() {
@@ -53,8 +59,9 @@ export const Card = () => {
 
     return (
         <div>
-            <Timer  displayMins={displayMins} displaySeconds={displaySeconds}/>
+            {showSettings ? <Settings /> : <Timer  displayMins={displayMins} displaySeconds={displaySeconds}/>}
             <Button toggleTimer={toggleTimer} />
+            <button onClick={toggleSettings}>Show Settings</button>
         </div>
     )
 }
