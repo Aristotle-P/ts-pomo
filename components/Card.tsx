@@ -12,6 +12,7 @@ export const Card = () => {
     const [showSettings, setShowSettings] = useState(false);
 
     function toggleTimer() {
+        Notification.requestPermission();
         setIsPaused(prevState => !prevState);
     }
 
@@ -19,8 +20,12 @@ export const Card = () => {
         setShowSettings(prevState => !prevState);
     }
 
-    function startBreak() {
-        setMinutes(5);
+    function createNotification(arg: string) {
+        if (!("Notification" in window)) {
+            return;
+        }
+        console.log("notif");
+        const notif = new Notification(`Your ${arg} has finished!`);
     }
 
     useEffect(() => {
@@ -39,12 +44,14 @@ export const Card = () => {
                         setMinutes(5);
                         setSeconds(0)
                         setIsPaused(true);
+                        createNotification("break");
                         return;
                     }
                     setOnBreak(false);
                     setMinutes(2);
                     setSeconds(0)
                     setIsPaused(true);
+                    createNotification("work");
                     return;
                 }
             } 
