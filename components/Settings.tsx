@@ -1,5 +1,7 @@
 export default function Settings() {
     return(
-        <div>Settings</div>
+        <div className="flex items-center justify-center">
+            Settings
+        </div>
     )
 }

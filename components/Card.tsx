@@ -24,8 +24,7 @@ export const Card = () => {
         if (!("Notification" in window)) {
             return;
         }
-        console.log("notif");
-        const notif = new Notification(`Your ${arg} has finished!`);
+        new Notification(`Your ${arg} has finished!`);
     }
 
     useEffect(() => {
@@ -44,14 +43,14 @@ export const Card = () => {
                         setMinutes(5);
                         setSeconds(0)
                         setIsPaused(true);
-                        createNotification("break");
+                        createNotification("work");
                         return;
                     }
                     setOnBreak(false);
                     setMinutes(2);
                     setSeconds(0)
                     setIsPaused(true);
-                    createNotification("work");
+                    createNotification("break");
                     return;
                 }
             } 
@@ -65,7 +64,7 @@ export const Card = () => {
     const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
 
     return (
-        <div>
+        <div className="flex flex-col gap-8 h-[52rem] w-[52rem] rounded-3xl bg-white text-black items-center justify-center">
             {showSettings ? <Settings /> : <Timer  displayMins={displayMins} displaySeconds={displaySeconds}/>}
             <Button toggleTimer={toggleTimer} />
             <button onClick={toggleSettings}>Show Settings</button>
